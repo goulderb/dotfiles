@@ -62,8 +62,8 @@ export EDITOR=vim
 export CVS_RSH=ssh
 export RSYNC_RSH=ssh
 export GIT_AUTHOR_NAME="Brett Goulder"
-export GIT_AUTHOR_EMAIL="predatorfreak@dcaf-security.org"
-export GIT_COMMITTER_EMAIL="predatorfreak@dcaf-security.org"
+export GIT_AUTHOR_EMAIL="goulderba@gmail.com"
+export GIT_COMMITTER_EMAIL="goulderba@gmail.com"
 export GIT_COMMITTER_NAME="Brett Goulder"
 export GOPATH="$HOME/go"
 export PATH="/usr/local/bin:$PATH:~/.rvm/bin:$GOPATH/bin:$(go env GOROOT)/bin"
@@ -72,20 +72,6 @@ export PATH="/usr/local/bin:$PATH:~/.rvm/bin:$GOPATH/bin:$(go env GOROOT)/bin"
 die() {
 	echo "ERROR: $@"
 	exit 1
-}
-
-# Various "useful" functions.
-git() {
-	case "$1" in
-		commit)
-			echo "Adding untracked files to repository..."
-			/usr/local/bin/git ls-files -o | git update-index --add --stdin
-			/usr/local/bin/git "$@"
-			;;
-		*)
-			/usr/local/bin/git "$@"
-			;;
-	esac
 }
 
 # Completion
