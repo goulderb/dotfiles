@@ -47,8 +47,25 @@ if `which keychain &>/dev/null`; then
 	`keychain --eval &>/dev/null`
 fi
 
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+
 # Prompt
-PROMPT="%n@%m\$ "
+PROMPT=$'%n $(vcs_info_wrapper)\$ '
 RPROMPT=$'%.%'
 
 # Exports
@@ -65,8 +82,7 @@ export GIT_AUTHOR_NAME="Brett Goulder"
 export GIT_AUTHOR_EMAIL="goulderba@gmail.com"
 export GIT_COMMITTER_EMAIL="goulderba@gmail.com"
 export GIT_COMMITTER_NAME="Brett Goulder"
-export GOPATH="$HOME/go"
-export PATH="/usr/local/bin:$PATH:~/.rvm/bin:$GOPATH/bin:$(go env GOROOT)/bin"
+export PATH="/usr/local/bin:$PATH"
 
 # Primary (read "library") functions, used in functions below.
 die() {
