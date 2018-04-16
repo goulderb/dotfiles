@@ -30,7 +30,7 @@ set si
 set pastetoggle=<F2>
 
 set spell
-set spelllang=en_gb
+set spelllang=en_us
 set backspace=indent,eol,start
 
 set tabstop=2 softtabstop=0 shiftwidth=2 smarttab expandtab
