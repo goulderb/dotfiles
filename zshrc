@@ -1,20 +1,17 @@
 export ZSH=/Users/brettgoulder/.oh-my-zsh
 ZSH_THEME="fishy"
 
-#CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
-#DISABLE_AUTO_UPDATE="true"
-#export UPDATE_ZSH_DAYS=13
-
-# DISABLE_LS_COLORS="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
-  git,
-  osx,
-  docker-compose,
+  macos
+  docker-compose
   ssh-agent
+  nvm
+  jump
+  brew
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -25,7 +22,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 if type -p dircolors >/dev/null ; then
-	eval `dircolors -b`
+   eval `dircolors -b`
 fi
 
 alias rm="grm -Iv"
